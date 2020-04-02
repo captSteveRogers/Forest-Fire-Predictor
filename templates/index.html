@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>FOREST FIRE PREDICTOR APP</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+  </head>
+  <body>
+    <div class="container jumbotron">
+      <h1 class="heading">FOREST FIRE PREDICTION</h1>
+      <form method="POST" action="/predict">
+        <div class="form-group">
+          <label for="Temperature"><b>Temperature(degrees C)</b></label>
+          <input type="text" class="form-control" id="Temperature" placeholder="Enter the Temperature" name="temp">
+        </div>
+        <div class="form-group">
+          <label for="Oxygen"><b>Oxygen(%)</b></label>
+          <input type="text" class="form-control" id="Oxygen" placeholder="Enter the Oxygen percentage" name="oxy">
+        </div>
+        <div class="form-group">
+          <label for="Humidity"><b>Humidity(%)</b></label>
+          <input type="text" class="form-control" id="Humidity" placeholder="Enter the percentage humidity" name="hum">
+        </div>
+        <button type="submit" class="btn btn-danger">Estimate</button>
+      </form>
+
+      <h4> Probability of a fire is : {{ pred }} </h4>
+      {% if pred > 0.5 %}
+      <div class="alert alert-danger" role="alert">
+        The Forest is in Danger.
+      </div>
+      {% else %}
+      <div class="alert alert-primary" role="alert">
+        The forest is safe for now.
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
